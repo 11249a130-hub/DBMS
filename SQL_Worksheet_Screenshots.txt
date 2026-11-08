@@ -1,0 +1,178 @@
+[ SQL Worksheet ]  -- Page 1: UNION
+
+CREATE TABLE student1 (
+    id NUMBER,
+    name VARCHAR2(30)
+);
+
+CREATE TABLE student2 (
+    id NUMBER,
+    name VARCHAR2(30)
+);
+INSERT INTO student1 VALUES (1, 'Hari');
+INSERT INTO student1 VALUES (2, 'Teja');
+INSERT INTO student1 VALUES (3, 'Lavanya');
+
+INSERT INTO student2 VALUES (3, 'Lavanya');
+INSERT INTO student2 VALUES (4, 'Divya');
+INSERT INTO student2 VALUES (5, 'Kumar');
+
+COMMIT;
+SELECT * FROM student1
+UNION
+SELECT * FROM student2;
+
+Query result                          Execution time: 0.031 seconds
+        ID  NAME
+ 1       1  Hari
+ 2       2  Teja
+ 3       3  Lavanya
+ 4       4  Divya
+ 5       5  Kumar
+
+------------------------------------------------------------------
+
+[ SQL Worksheet ]  -- Page 2: INTERSECT
+
+CREATE TABLE student1 (
+    id NUMBER,
+    name VARCHAR2(30)
+);
+
+CREATE TABLE student2 (
+    id NUMBER,
+    name VARCHAR2(30)
+);
+
+INSERT INTO student1 VALUES (1, 'Hari');
+INSERT INTO student1 VALUES (2, 'Meena');
+INSERT INTO student1 VALUES (3, 'Varun');
+
+INSERT INTO student2 VALUES (3, 'Varun');
+INSERT INTO student2 VALUES (4, 'Pooja');
+INSERT INTO student2 VALUES (5, 'Kumar');
+
+COMMIT;
+
+SELECT * FROM student1
+INTERSECT
+SELECT * FROM student2;
+
+Query result                          Execution time: 0.011 seconds
+        ID  NAME
+ 1       3  Varun
+
+------------------------------------------------------------------
+
+[ SQL Worksheet ]  -- Page 3: MINUS
+
+CREATE TABLE student1 (
+    id NUMBER,
+    name VARCHAR2(30)
+);
+
+CREATE TABLE student2 (
+    id NUMBER,
+    name VARCHAR2(30)
+);
+
+INSERT INTO student1 VALUES (1, 'Hari');
+INSERT INTO student1 VALUES (2, 'Meena');
+INSERT INTO student1 VALUES (3, 'Varun');
+
+INSERT INTO student2 VALUES (3, 'Varun');
+INSERT INTO student2 VALUES (4, 'Pooja');
+INSERT INTO student2 VALUES (5, 'Kumar');
+
+COMMIT;
+
+SELECT * FROM student1
+MINUS
+SELECT * FROM student2;
+
+------------------------------------------------------------------
+
+Query result                          Execution time: 0.009 seconds
+        ID  NAME
+ 1       1  Hari
+ 2       2  Meena
+
+------------------------------------------------------------------
+
+[ SQL Worksheet ]  -- VIEW
+
+CREATE TABLE student1 (
+    id NUMBER,
+    name VARCHAR2(30)
+);
+
+CREATE TABLE student2 (
+    id NUMBER,
+    name VARCHAR2(30)
+);
+
+INSERT INTO student1 VALUES (1, 'Hari');
+INSERT INTO student1 VALUES (2, 'Meena');
+INSERT INTO student1 VALUES (3, 'Varun');
+
+INSERT INTO student2 VALUES (3, 'Varun');
+INSERT INTO student2 VALUES (4, 'Pooja');
+INSERT INTO student2 VALUES (5, 'Kumar');
+
+COMMIT;
+CREATE VIEW student_view AS
+SELECT id, name
+FROM student1;
+SELECT * FROM student_view;
+
+Query result                          Execution time: 0.016 seconds
+        ID  NAME
+ 1       1  Hari
+ 2       2  Meena
+ 3       3  Varun
+
+------------------------------------------------------------------
+
+[ SQL Worksheet ]  -- PL/SQL: addition
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    A NUMBER(2) := 3;
+    B NUMBER(2) := 10;
+    C NUMBER;
+BEGIN
+    C := A + B;
+    DBMS_OUTPUT.PUT_LINE('C = ' || C);
+END;
+/
+
+Script output
+C = 13
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.006
+
+------------------------------------------------------------------
+
+[ SQL Worksheet ]  -- PL/SQL: variable
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    Emp_Name VARCHAR2(20);
+
+BEGIN
+    Emp_Name := 'Anitha';
+    DBMS_OUTPUT.PUT_LINE('Name: ' || Emp_Name);
+
+END;
+/
+
+Script output
+Name: Anitha
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.005
